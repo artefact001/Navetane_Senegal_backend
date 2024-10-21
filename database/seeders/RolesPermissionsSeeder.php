@@ -300,5 +300,5 @@ class RolesPermissionsSeeder extends Seeder
        ];
        $roleEquipe->givePermissionTo($permissionsEquipe);
 
-      
 }
+ }

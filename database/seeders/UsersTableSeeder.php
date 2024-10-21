@@ -50,6 +50,6 @@ class UsersTableSeeder extends Seeder
                 'password' => $userData['password'],
             ]);
 
-            // Attribution du rôle à l'utilisateur        
+            // Attribution du rôle à l'utilisateur
     }
 }

@@ -41,6 +41,7 @@ class TirageService
         $equipesParPoule = ceil(count($equipes) / $nombrePoules);
 
         for ($i = 0; $i < $nombrePoules; $i++) {
+        
             $poules[] = [
                 'nom' => 'Poule ' . chr(65 + $i), // 'A', 'B', 'C', ...
                 'equipes' => array_slice($equipes, $i * $equipesParPoule, $equipesParPoule),
