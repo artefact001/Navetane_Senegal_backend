@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 namespace App\Services;
 
 use App\Models\Point;
@@ -33,7 +30,7 @@ class ClassementService
                 return ['rank' => $index + 1, 'points' => $rank->total_points];
             }
         }
-        
+
         return null; // Si l'équipe n'est pas classée
     }
 }

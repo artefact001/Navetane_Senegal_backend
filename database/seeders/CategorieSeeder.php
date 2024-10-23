@@ -13,16 +13,8 @@ class CategorieSeeder extends Seeder
     public function run(): void
     {
         DB::table('categories')->insert([
-            [
-                'nom' => 'Senior',  // Nom de la catégorie
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'nom' => 'Cadet',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
+            ['id' => 1, 'nom' => 'Seniors', 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 2, 'nom' => 'Cadet', 'created_at' => now(), 'updated_at' => now()],
         ]);
     }
 }

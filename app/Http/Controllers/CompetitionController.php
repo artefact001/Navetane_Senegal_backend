@@ -6,7 +6,7 @@ use App\Http\Requests\CompetitionRequest;
 use App\Models\Competition;
 use App\Services\CompetitionService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 
 class CompetitionController extends Controller
 {

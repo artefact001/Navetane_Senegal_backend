@@ -46,7 +46,7 @@ class EntityRequest extends FormRequest
             'categorie_id' => ['required', 'exists:categories,id'],
 
             // Validation pour la table 'categories'
-            'categorie_nom' => ['required', 'string', 'max:255'],
+            'nom' => ['required', 'string', 'max:255'],
 
             // Validation pour la table 'zones'
             'zone_nom' => ['required', 'string', 'max:255'],

@@ -1,38 +1,36 @@
-<?php
+<?php  
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
+namespace Database\Seeders;  
 
-class CreateJoueursTable extends Migration
-{
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('joueurs', function (Blueprint $table) {
-            $table->id();  // Clé primaire auto-incrémentée
-            $table->string('nom');  // Nom du joueur
-            $table->integer('age');  // Âge du joueur
-            $table->string('licence')->unique();  // Numéro de licence unique du joueur
-            $table->unsignedBigInteger('equipe_id');  // Clé étrangère vers la table 'equipes'
-            $table->unsignedBigInteger('categorie_id');  // Clé étrangère vers la table 'categories'
-            $table->foreign('equipe_id')->references('id')->on('equipes')->onDelete('cascade');  // Si l'équipe est supprimée, tous les joueurs associés le seront aussi
-            $table->foreign('categorie_id')->references('id')->on('categories')->onDelete('cascade');  // Suppression en cascade si la catégorie est supprimée
-            $table->timestamps();  // Dates de création et de mise à jour
-        });
-    }
+use Illuminate\Database\Seeder;  
+use Illuminate\Support\Facades\DB;  
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('joueurs');
-    }
+class JoueurSeeder extends Seeder  
+{  
+    /**  
+     * Run the database seeds.  
+     *  
+     * @return void  
+     */  
+    public function run()  
+    {  
+        $prenoms = ['Moussa', 'Aissatou', 'Sidy', 'Fatou', 'Cheikh', 'Mariama', 'Ousmane', 'Ndeye', 'Ibrahima', 'Diatou'];  
+        $noms = ['Diallo', 'Sow', 'Ba', 'Faye', 'Gueye', 'Diop', 'Kane', 'Lamine', 'Sy', 'Ndiaye'];  
+
+        // Récupérer les IDs d'équipes et catégories  
+        $equipes = DB::table('equipes')->pluck('id')->toArray();  
+        $categories = DB::table('categories')->pluck('id')->toArray();  
+
+        for ($i = 0; $i < 25; $i++) {  
+            DB::table('joueurs')->insert([  
+                'nom' => $prenoms[array_rand($prenoms)] . ' ' . $noms[array_rand($noms)],  
+                'age' => rand(18, 35),  
+                'licence' => 'LIC-' . strtoupper(uniqid()),  
+                'equipe_id' => $equipes[array_rand($equipes)],  
+                'categorie_id' => $categories[array_rand($categories)],  
+                'created_at' => now(),  
+                'updated_at' => now(),  
+            ]);  
+        }  
+    }  
 }

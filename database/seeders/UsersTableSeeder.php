@@ -53,3 +53,5 @@ class UsersTableSeeder extends Seeder
             // Attribution du rôle à l'utilisateur
     }
 }
+
+ }

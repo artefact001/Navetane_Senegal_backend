@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ValidationRequest;
-
 use App\Http\Requests\JoueurRequest;
 use App\Services\JoueurService;
 use Illuminate\Http\JsonResponse;
+
+use  App\Http\Requests\ValidatoreRequest;
 
 class JoueurController extends Controller
 {
@@ -34,9 +34,11 @@ class JoueurController extends Controller
      * @param JoueurRequest $request
      * @return JsonResponse
      */
-    public function store(JoueurRequest $request): JsonResponse
+    public function store(JoueurRequest $request): JsonResponse  // Utilisation de JoueurRequest
     {
-        $joueur = $this->joueurService->creerJoueur($request->validated());
+        // Utilisation de validated() pour récupérer les données validées
+        $joueur = $this->joueurService->creerJoueur($request->all());
+
         return response()->json($joueur, 201);
     }
 
@@ -61,8 +63,12 @@ class JoueurController extends Controller
      */
     public function update(JoueurRequest $request, int $id): JsonResponse
     {
+        // Récupérer le joueur par son ID
         $joueur = $this->joueurService->recupererJoueurParId($id);
+
+        // Mettre à jour le joueur avec les données validées
         $joueur = $this->joueurService->mettreAJourJoueur($joueur, $request->validated());
+
         return response()->json($joueur, 200);
     }
 
@@ -74,8 +80,12 @@ class JoueurController extends Controller
      */
     public function destroy(int $id): JsonResponse
     {
+        // Récupérer le joueur à supprimer
         $joueur = $this->joueurService->recupererJoueurParId($id);
+
+        // Supprimer le joueur
         $this->joueurService->supprimerJoueur($joueur);
+
         return response()->json(null, 204);
     }
 }

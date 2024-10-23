@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 class EquipeRequest extends FormRequest
 {
     /**
-     * Déterminer si l'utilisateur est autorisé à faire cette requête.
+     * Détermine si l'utilisateur est autorisé à faire cette requête.
      *
      * @return bool
      */
@@ -25,8 +25,10 @@ class EquipeRequest extends FormRequest
     {
         return [
             'nom' => 'required|string|max:255',
-            'ville' => 'required|string|max:255',
-            'stade' => 'nullable|string|max:255',
+            'logo' => 'nullable|string|max:255',
+            'date_creer' => 'required|date',
+            'zone_id' => 'required|integer|exists:zones,id',
+            'user_id' => 'nullable|integer|exists:users,id'
         ];
     }
 
@@ -39,7 +41,9 @@ class EquipeRequest extends FormRequest
     {
         return [
             'nom.required' => 'Le nom de l\'équipe est requis.',
-            'ville.required' => 'La ville de l\'équipe est requise.',
+            'date_creer.required' => 'La date de création est requise.',
+            'zone_id.exists' => 'La zone sélectionnée doit exister.',
+            'user_id.exists' => 'L\'utilisateur sélectionné doit exister.',
         ];
     }
 }

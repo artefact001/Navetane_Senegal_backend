@@ -12,6 +12,9 @@ class TirageController extends Controller
 {
     protected $tirageService;
 
+    //index
+  
+
     public function __construct(TirageService $tirageService)
     {
         $this->tirageService = $tirageService;

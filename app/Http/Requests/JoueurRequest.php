@@ -6,14 +6,25 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class JoueurRequest extends FormRequest
 {
+    /**
+     * Détermine si l'utilisateur est autorisé à faire cette requête.
+     */
+    public function authorize(): bool
+    {
+        return true; // Assurez-vous que les autorisations sont correctes
+    }
+
+    /**
+     * Règles de validation pour cette requête.
+     */
     public function rules(): array
     {
         return [
             'nom' => 'required|string|max:255',
-            'prenom' => 'required|string|max:255',
-            'date_naissance' => 'required|date',
-            'poste' => 'required|string|max:50',
-            'equipe_id' => 'required|exists:equipes,id', // Supposant que tu as une table équipes
+            'age' => 'required|integer|min:18|max:35',
+            'licence' => 'required|string|unique:joueurs,licence',
+            'equipe_id' => 'required|exists:equipes,id',
+            'categorie_id' => 'required|exists:categories,id',
         ];
     }
 }
